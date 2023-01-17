@@ -1,7 +1,8 @@
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    url("https://th.bing.com/th/id/R.7c6f31411caf83ed5a9e1968c23ec3ec?rik=4S7mnAewqBmmwg&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fwp1857476.jpg&ehk=V7ttcQ8mul6SV6r8J0wiOVbuKPHIsiE7wfMwtwhrED8%3d&risl=&pid=ImgRaw&r=0");
+    /* https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80 */
     background-size: cover;
     background-position: center;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);

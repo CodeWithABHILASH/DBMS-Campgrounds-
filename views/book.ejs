@@ -1,0 +1,120 @@
+<% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/stylesheets/stars.css" />
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>book</title>
+    </head>
+
+    <body>
+        <!-- <form action="book" method="post">
+            <input type="date" name="EntryDate" id="EntryDate" >
+            <input type="date" name="ExitDate" id="ExitDate" >
+            <input type="Number" name="TotalBill" id="TotalBill">
+            <button>book</button>
+        </form> -->
+
+        <!-- ######################################################## -->
+
+        <!-- <div class="col">
+                <form>
+                    <div class="row">
+                      <div class="col">
+                        <input type="date" class="form-control" placeholder="First name">
+                      </div>
+                      <div class="col">
+                        <input type="date" class="form-control" placeholder="Last name">
+                      </div>
+                    </div>
+                  </form>
+            </div> -->
+        <!-- ####################################################################### -->
+        <% layout('layouts/boilerplate')%>
+            <link rel="stylesheet" href="/stylesheets/stars.css" />
+
+            <div class="row">
+                <div class="col-6">
+
+
+                   
+
+                    <div></div>
+                    <div id="campgroundCarousel" class="carousel slide  card shadow" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRymxiBVzDxTibzW8aiIHRGFkgADl-jTPfaYQ&usqp=CAU"
+                                    class="d-block w-100 h-500" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3  card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= campground.title%>
+                            </h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-muted">
+                                <%= campground.location%>
+                            </li>
+                            <li class="list-group-item text-muted">$<%= campground.price%>/night</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="col">
+                   
+
+                  
+
+                    
+                        <div class="row">
+                            <h1>Book your campground</h1>
+                                <div class="card shadow">
+
+                                    <div class="card-body">
+                                        
+                                        <form action="book" method="POST" class="validated-form" novalidate>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="EntryDate">EntryDate</label>
+                                                <input class="form-control" type="date" id="EntryDate" name="EntryDate" autofocus required>
+                                               
+                                            </div>
+                    
+                                            <div class="mb-3">
+                                                <label class="form-label" for="ExitDate">ExitDate</label>
+                                                <input class="form-control" type="date" id="ExitDate" name="ExitDate" required>
+                                                
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="number">Number of tourists</label>
+                                                <input class="form-control" type="number" id="number" name="TotalBill" required min="1" max="50">
+                                                
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <button class="btn btn-success btn-block mt-3">Book</button>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                          
+                        </div>
+                   
+                </div> 
+            </div>
+
+            <script>
+                const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+                const campground =<% - JSON.stringify(campground) %>
+            </script>
+            <script src="/javascripts/showPageMap.js"></script>
+    </body>
+
+    </html>

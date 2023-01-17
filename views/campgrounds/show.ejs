@@ -35,8 +35,10 @@
                 <li class="list-group-item text-muted"><%= campground.location%></li>
                 <li class="list-group-item">Submitted by <%= campground.author.username%></li>
                 <li class="list-group-item">$<%= campground.price%>/night</li>
+               
+             
                 <%if (currentUser) {%>
-                    <button type="button" class="btn btn-info">Book campground</button>
+                    <a href="<%= campground._id%>/book" class="list-group-item"><button type="button" class="btn btn-info">Book campground</button></a>
                 <% } %>
 
                 

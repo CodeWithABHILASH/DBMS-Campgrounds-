@@ -11,24 +11,33 @@
                     <form action="/register" method="POST" class="validated-form" novalidate>
                         <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input class="form-control" type="text" id="username" name="username" required autofocus>
+                            <input class="form-control" type="text" id="username" name="username" required autofocus maxlength="10" minlength="6">
                             <div class="valid-feedback">
                                 Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                               Username must contain min 6 characters max 10 characters
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="email">Email</label>
-                            <input class="form-control" type="email" id="email" name="email" required>
+                            <input class="form-control" type="email" id="email" name="email" required minlength="14">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
+                            <div class="invalid-feedback">
+                                Please provide valid Email
+                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="password">Password</label>
-                            <input class="form-control" type="password" id="password" name="password" required>
+                            <input class="form-control" type="password" id="password" name="password" required maxlength="10" minlength="6">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
+                            <div class="invalid-feedback">
+                                password must be between 6 to 10 characters
+                             </div>
                         </div>
                         <button class="btn btn-success btn-block">Register</button>
                     </form>

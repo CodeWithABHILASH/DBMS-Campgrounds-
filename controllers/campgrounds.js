@@ -1,8 +1,24 @@
 const Campground = require('../models/campground');
+const Book = require('../models/book');
+const User = require('../models/user');
 const { cloudinary } = require("../cloudinary");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken=process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+
+const utility=function(a){
+ const s1=new String(a.EntryDate)
+    const s2=new String(a.ExitDate)
+    const st=new Date(s1.substring(0,10));
+    const et=new Date(s2.substring(0,10));
+    const stms=st.getTime()
+    const etms=et.getTime()
+    const tg=etms-stms;
+    const aDay=24*60*60*1000;
+    const sp=Math.round(tg/aDay);
+    console.log(sp)
+    return sp;
+}
 module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({});
     res.render('campgrounds/index', { campgrounds })
@@ -42,6 +58,42 @@ module.exports.showCampground = async (req, res,) => {
     }
     res.render('campgrounds/show', { campground });
 }
+
+module.exports.showBook = async (req, res,) => {
+    const campground = await Campground.findById(req.params.id);
+   res.render('book.ejs',{campground})
+}
+module.exports.confirmBook = async (req, res) => {
+    const campground = await Campground.findById(req.params.id);
+    const book = await Book.findById(req.params.bid);
+    const user = await User.findById(book.userid);
+   
+    res.render('book1.ejs',{campground,book,user})
+ }
+module.exports.Book = async (req, res,) => {
+
+    if(req.body.EntryDate>req.body.ExitDate)
+    {
+        req.flash('error', 'improper date format!');
+        res.redirect('book')
+    }else {
+
+    const campground = await Campground.findById(req.params.id);
+   let sp=utility(req.body)
+    const bill=req.body.TotalBill*(campground.price)*sp;
+    const book = new Book({
+        campid:req.params.id,
+        userid: req.user._id,
+        EntryDate:req.body.EntryDate,
+        ExitDate:req.body.ExitDate,
+        TotalBill:bill
+    });
+   
+    await book.save();
+    req.flash('success', 'Successfully booked a campground!');
+    res.redirect(`${book._id}/confirmBook`)
+}
+ }
 
 module.exports.renderEditForm = async (req, res) => {
     const { id } = req.params;

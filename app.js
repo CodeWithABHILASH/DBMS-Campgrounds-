@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 
-const express = require('express');
+const express = require('express')
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
@@ -15,11 +15,13 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Campground = require('./models/campground')
+const Book = require('./models/book')
 
 
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+const { campgroundSchema } = require('./schemas');
 
 mongoose.connect('mongodb://localhost:27017/camp', {
     useNewUrlParser: true,
@@ -97,6 +99,23 @@ app.get('/search', async (req, res) => {
     res.render('filter', result);
 
 });
+
+app.get('/history', async (req, res) => {
+    const id =req.user._id;
+    let books = await Book.find({userid:id});
+    const camps=[];
+   
+    for(let book of books )
+    {
+        bid=book.campid;
+        c = await Campground.findById(bid);
+         camps.push({title:c.title,url:c.images[0].url});
+    }
+  res.render('history.ejs',{camps,books})
+
+});
+
+
 app.get('/lth', async (req, res) => {
     const campgrounds = await Campground.find({});
     arr = []
@@ -131,6 +150,7 @@ app.get('/htl', async (req, res) => {
     res.render('filter', result);
 
 });
+
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
@@ -140,6 +160,19 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
+
+
+
+app.get('/get-room-data', async (req, resp) => {
+    try {
+      const details = await RoomBooked.find({});
+      resp.send(details);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')

@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/stylesheets/stars.css" />
+
+    <div class="row">
+
+
+
+        <div class="col-6 ">
+            <div id="campgroundCarousel" class="carousel slide card shadow" data-ride="carousel">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaO9RLNt-z3lVxTrEZBOQvA8cXWT7YhSQVrg&usqp=CAU"
+                            class="d-block w-100" alt="" />
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card mb-3 card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Booking Details
+                    </h3>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted">
+                        User: <%= user.username%>
+                    </li>
+                    <li class="list-group-item text-muted">
+                        Email: <%= user.email%>
+                    </li>
+                    <li class="list-group-item">
+                        EntryDate: <%= book.EntryDate%>
+                    </li>
+                    <li class="list-group-item"> ExitDate: <%= book.ExitDate%>
+                    </li>
+                </ul>
+                <div class="card-footer text-muted">TotalBill: $<%= book.TotalBill%>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 ">
+            
+            <div class="card mb-3 card shadow">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Campground Details
+                    </h2>
+                    <h5 class="card-title">
+                        <%= campground.title%>
+                    </h5>
+                    <p class="card-text">
+                        <%= campground.description%>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted">
+                        <%= campground.location%>
+                    </li>
+
+                    <li class="list-group-item">$<%= campground.price%>/night</li>
+                </ul>
+                <div class="card-footer text-muted">2 days ago</div>
+            </div>
+        </div>
+
+        
+
+
+    </div>
+
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const campground =<% - JSON.stringify(campground) %>
+    </script>
+    <script src="/javascripts/showPageMap.js"></script>

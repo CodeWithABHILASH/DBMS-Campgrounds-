@@ -6,9 +6,15 @@ const bookSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Campground'
     },
-    authorid: {
+    userid: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    EntryDate:{
+        type:Date
+    },
+    ExitDate:{
+        type:Date
     },
     TotalBill:{
         type:Number
