@@ -71,12 +71,19 @@ module.exports.confirmBook = async (req, res) => {
     res.render('book1.ejs',{campground,book,user})
  }
 module.exports.Book = async (req, res,) => {
-
-    if(req.body.EntryDate>req.body.ExitDate)
+    let date= Date.now();
+    console.log(date)
+    
+    if(req.body.EntryDate>req.body.ExitDate )
     {
         req.flash('error', 'improper date format!');
         res.redirect('book')
-    }else {
+    }else if(new Date(date)>new Date(req.body.EntryDate))
+    {
+        req.flash('error', 'improper date format!');
+        res.redirect('book')
+    }
+    else {
 
     const campground = await Campground.findById(req.params.id);
    let sp=utility(req.body)

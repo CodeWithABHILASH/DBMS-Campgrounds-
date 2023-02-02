@@ -91,7 +91,7 @@ app.get('/search', async (req, res) => {
     for (let campground of campgrounds) {
         let location1 = campground.location.toLowerCase(); 
         let title1 = campground.title.toLowerCase();
-        if ( title1.includes(req.query.location) || location1.includes(req.query.location))
+        if ( title1.includes(req.query.location.toLocaleLowerCase()) || location1.includes(req.query.location.toLocaleLowerCase()))
             result.push(campground)
     }
 
